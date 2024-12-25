@@ -17,28 +17,35 @@ export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     username: new FormControl("", [Validators.required]),
     password: new FormControl("", [Validators.required])
-  })
+  });
+
+  isFocused: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {
-    if(this.authService.isLoggedIn()){
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['/tasks'])
     }
   }
 
-  ngOnInit(): void {
-    var availableUsers = this.authService.getUsers();
-    if(availableUsers.length <= 0) {
-      alert("no users have been registered on this machine. Redirecting you on the Registration page");
-      this.router.navigate(['/auth/register'])
+  ngOnInit(): void { }
+
+  onUsernameChange() {
+    if(!this.isFocused){
+      var availableUsers = this.authService.getUsers();
+      if (availableUsers.length <= 0) {
+        alert("no users have been registered on this machine. Redirecting you on the Registration page");
+        this.router.navigate(['/auth/register'])
+      }
+      this.isFocused = true;
     }
   }
 
   onLogin() {
     var isLoginSuccess = this.authService.login(
-      this.loginForm.value.username ?? "", 
+      this.loginForm.value.username ?? "",
       this.loginForm.value.password ?? ""
     );
     if (!isLoginSuccess) {
