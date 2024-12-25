@@ -39,19 +39,30 @@ export class TaskListComponent {
   }
 
   onDeleteTask(id: number) {
-    this.tasks = this.taskService.deleteTask(id);
+    let result = confirm("Heads Up! You are going to delete a Task.\nDo you want to proceed with task deletion?");
+    if (result) {
+      this.tasks = this.taskService.deleteTask(id);
+    }
   }
 
   onLogout() {
-    this.authService.logout();
-    this.router.navigate(['/auth']);
+    let result = confirm("Do you want to logout?");
+    if (result) {
+      this.authService.logout();
+      this.router.navigate(['/auth']);
+    }
   }
 
   onTaskComplete(id: number) {
-    let result = confirm("Are you sure to mark task as completed?");
-    if(result){
+    let result = confirm("Do you want to mark task as completed?");
+    if (result) {
       this.taskService.completeTask(id);
       this.tasks = this.taskService.getTasks();
     }
+  }
+
+  onClearData() {
+    this.taskService.clearTaskData();
+    this.tasks = [];
   }
 }

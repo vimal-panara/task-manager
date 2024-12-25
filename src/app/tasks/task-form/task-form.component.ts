@@ -21,7 +21,7 @@ export class TaskFormComponent implements OnInit {
   todayDate: Date = new Date();
   taskId: number = 0;
   taskForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     priority: new FormControl('High', [Validators.required]),
     dueDate: new FormControl(`${this.todayDate.getFullYear()}-${this.todayDate.getMonth()}-${this.todayDate.getDate()}`, [Validators.required])
   });
@@ -39,7 +39,7 @@ export class TaskFormComponent implements OnInit {
     this.task = taskService.getTaskById(this.taskId);
     if (this.task) {
       this.taskForm = new FormGroup({
-        name: new FormControl(this.task?.name ?? "", [Validators.required]),
+        name: new FormControl(this.task?.name ?? "", [Validators.required, Validators.minLength(3)]),
         priority: new FormControl(this.task?.priority ?? "High", [Validators.required]),
         dueDate: new FormControl(this.task?.dueDate ?? (`${this.todayDate.getFullYear()}-${this.todayDate.getMonth()}-${this.todayDate.getDate()}`), [Validators.required])
       });

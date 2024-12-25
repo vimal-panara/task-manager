@@ -26,7 +26,7 @@ export class TaskService {
     let usersTasks = this.getAllUserTasks()
     let temp = usersTasks.filter(x => x.username === this.getUsername())
     let userTasks = temp[0]
-    if(temp.length > 0){
+    if (temp.length > 0) {
       userTasks.tasks = tasks;
     } else {
       usersTasks.push({
@@ -85,12 +85,30 @@ export class TaskService {
 
   completeTask(id: number) {
     let tasks = this.getTasks().map(x => {
-      if(x.id === id){
+      if (x.id === id) {
         x.completed = true;
         return x;
       }
       return x;
     })
     this.saveTasksLS(tasks);
+  }
+
+  clearLoggedInUserTasks() {
+    let result = confirm("Do you want to clear all data for user: " + this.getUsername() + " ?");
+    if (result) {
+      this.saveTasksLS([]);
+    }
+  }
+
+  clearTaskData() {
+    let result = confirm("Do you want to clear all data for all users?");
+    if (result) {
+      let finalResult = confirm("Are you sure??");
+      if(finalResult){
+        alert("Just kidding you can not delete all users' tasks...\nBut you can delete your tasks.");
+        this.clearLoggedInUserTasks();
+      }
+    }
   }
 }
