@@ -1,8 +1,8 @@
 <div class="p-4">
 	<div class="max-w-3xl p-6 mx-auto bg-white rounded-lg shadow-md">
-		<div class="flex gap-2 place-items-baseline">
-			<h1 class="mb-4 text-xl font-bold">{{ task ? 'Edit Task' : 'Add Task' }}</h1>
-			<h2 class="px-2 text-lg border-l-2 border-gray-700">User: {{this.loggedInUser}}</h2>
+		<div class="flex gap-2 place-items-baseline flex-col md:flex-row">
+			<h1 class="text-xl font-bold md:mb-4">{{ task ? 'Edit Task' : 'Add Task' }}</h1>
+			<h2 class="text-lg border-gray-700 md:border-l-2 md:px-2 mb-4 md:mb-auto">User: {{this.loggedInUser}}</h2>
 		</div>
 		<!-- <h2 class="mb-4 text-xl font-bold">{{ task ? 'Edit Task' : 'Add Task' }}</h2> -->
 		<form (ngSubmit)="onSaveTask()" [formGroup]="taskForm">
