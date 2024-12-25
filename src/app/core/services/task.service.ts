@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
 import { JsonpInterceptor } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { UserTask } from '../models/usertask'
+import { UserTask } from '../models/userTask';
 
 @Injectable({
   providedIn: 'root'
