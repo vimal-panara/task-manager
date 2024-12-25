@@ -1,0 +1,27 @@
+<div class="flex items-center justify-center h-screen bg-gray-100">
+	<div class="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+		<h2 class="mb-6 text-2xl font-bold text-center">Login</h2>
+		<form (ngSubmit)="onLogin()" [formGroup]="loginForm" class="my-4">
+			<div class="mb-4">
+				<input id="username" type="text"
+					class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:ring-offset-2"
+					formControlName="username" name="username" placeholder="username" />
+			</div>
+			<div class="mb-6">
+				<input id="password" type="password"
+					class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:ring-offset-2"
+					formControlName="password" name="password" placeholder="password" />
+			</div>
+			<button type="submit"
+				class="w-full px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+				Login
+			</button>
+		</form>
+		<div class="border border-gray-400"></div>
+		<button
+			class="w-full px-4 py-2 my-4 text-white bg-indigo-600 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			(click)="onRegisterRedirect()"
+		> Register Here!
+		</button>
+	</div>
+</div>

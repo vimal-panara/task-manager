@@ -1,0 +1,55 @@
+<div class="p-4">
+	<div class="flex items-center justify-between mb-4">
+		<div class="flex gap-2 place-items-baseline">
+			<h1 class="text-2xl font-bold">Task List</h1>
+			<h2 class="px-2 text-lg border-l-2 border-gray-700">User: {{this.loggedInUser}}</h2>
+		</div>
+		<div>
+			<button (click)="onAddTask()"
+				class="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+				Add Task
+			</button>
+			<button (click)="onLogout()"
+				class="px-4 py-2 ml-4 text-white bg-green-600 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+				Logout
+			</button>
+		</div>
+	</div>
+	<div class="mb-4">
+		<input type="text"
+			class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+			placeholder="Search tasks..." [ngModel]="search()" (ngModelChange)="search.set($event)" />
+	</div>
+	<div class="bg-white rounded-lg shadow-md">
+		<table class="min-w-full">
+			<thead class="bg-gray-200">
+				<tr>
+					<th class="px-4 py-2 text-sm font-medium text-left text-gray-700">Task</th>
+					<th class="px-4 py-2 text-sm font-medium text-left text-gray-700">Priority</th>
+					<th class="px-4 py-2 text-sm font-medium text-left text-gray-700">Due Date</th>
+					<th class="px-4 py-2 text-sm font-medium text-left text-gray-700">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for (task of tasks | taskFilter:search(); track $index) {
+				<tr class="border-t" [class]='task.completed ? "bg-green-100" : "bg-red-100"'>
+					<td class="px-4 py-2">{{ task.name }}</td>
+					<td class="px-4 py-2">{{ task.priority }}</td>
+					<td class="px-4 py-2">{{ task.dueDate }}</td>
+					<td class="px-4 py-2">
+						<button (click)="onEditTask(task)" class="text-indigo-600 hover:underline">
+							Edit
+						</button>
+						<button (click)="onDeleteTask(task.id)" class="ml-2 text-red-600 hover:underline">
+							Delete
+						</button>
+						<button (click)="onTaskComplete(task.id)" [disabled]="task.completed" class="ml-2 text-green-600 hover:underline" [class]="task.completed ? 'cursor-not-allowed' : ''">
+							Completed
+						</button>
+					</td>
+				</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
