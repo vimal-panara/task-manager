@@ -42,8 +42,12 @@ export class TaskService {
     if (userTasks.length > 0) {
       let userTask = userTasks.filter((x: any) => x.username === this.getUsername());
       if (userTask.length > 0) {
-        let tasks = userTask[0].tasks;
-        return tasks;
+        let tasks: Task[] = userTask[0].tasks;
+        return tasks.sort((t1: Task, t2: Task) => {
+          let dd1 = new Date(t1.dueDate);
+          let dd2 = new Date(t2.dueDate);
+          return dd1.getTime() - dd2.getTime();
+        });
       }
       return [];
     }
