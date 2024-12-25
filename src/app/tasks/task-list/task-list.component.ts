@@ -63,6 +63,6 @@ export class TaskListComponent {
 
   onClearData() {
     this.taskService.clearTaskData();
-    this.tasks = [];
+    this.tasks = this.taskService.getTasks();
   }
 }
